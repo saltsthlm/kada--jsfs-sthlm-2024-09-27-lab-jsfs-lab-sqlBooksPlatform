@@ -16,7 +16,7 @@ const port = 3001;
   const authorRouter = createAuthorsRouter(authorService);
   const BookService = createBookService(client);
   const bookRouters = createBooksRouter(BookService)
-
+  app.use(express.json())
   app.use("/api/authors", authorRouter);
   app.use("/api/books", bookRouters)
 

@@ -35,7 +35,7 @@ export const createBookService = (db: PoolClient) => {
         return result.rows[0];
     },
     async delete(id: string) {
-        const query = "DELETE FROM book WHERE id = $1"
+        const query = "DELETE FROM books WHERE id = $1"
         await db.query(query, [id])
     }
     
