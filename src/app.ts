@@ -14,8 +14,8 @@ const port = 3001;
   app.use(express.json());
   app.use("/api/authors", createAuthorFeature(client));
   app.use("/api/books", createBookFeature(client));
-  app.use("/api/purchases", createPurchasesFeature(client))
-  app.use("/api/buyers", createBuyersFeature(client))
+  app.use("/api/purchases", createPurchasesFeature(client));
+  app.use("/api/buyers", createBuyersFeature(client));
 })();
 
 app.listen(port, () =>
