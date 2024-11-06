@@ -11,13 +11,17 @@ export const createBooksRouter = (service: BookService) => {
     const book = await service.getById(req.params.id);
     res.status(200).json(book);
   });
+  router.post("/", async (req, res) => {
+    await service.add(req.body);
+    res.status(201).json()
+  })
   router.patch("/:id", async (req, res) => {
     const book = await service.patch(req.body, req.params.id);
     res.status(200).json(book);
-  })
+  });
   router.delete("/:id", async (req, res) => {
-    await service.delete(req.params.id)
-    res.status(204).json()
+    await service.delete(req.params.id);
+    res.status(204).json();
   });
   return router;
 };
