@@ -1,5 +1,10 @@
 export const createTablesAndSeedData = () => {
     return `
+        DROP TABLE IF EXISTS purchases;
+        DROP TABLE IF EXISTS buyers;
+        DROP TABLE IF EXISTS books;
+        DROP TABLE IF EXISTS authors;
+
       CREATE TABLE IF NOT EXISTS authors (
         id SERIAL PRIMARY KEY,
         name VARCHAR(120) NOT NULL,
