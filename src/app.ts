@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import express, { Express } from 'express';
 
 import instructors from './instructors';
