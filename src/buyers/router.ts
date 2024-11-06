@@ -7,4 +7,5 @@ export const createBuyersRouter = (service: BuyerService) => {
     await service.add(req.body);
     res.status(201).json();
   });
+  return router
 };
