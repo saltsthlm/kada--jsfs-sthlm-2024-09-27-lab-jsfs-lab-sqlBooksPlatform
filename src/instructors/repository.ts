@@ -1,4 +1,4 @@
-import db from './db';
+import db from '../db';
 
 // import package 'pg' here and get the connection from the connection pool
 // see pg docs

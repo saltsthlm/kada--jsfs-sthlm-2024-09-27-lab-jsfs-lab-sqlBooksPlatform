@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/appliedtechnology/jsfs-lab-sqlBooksPlatform#readme",
   "dependencies": {
+    "dotenv": "^16.4.5",
     "express": "^5.0.1",
     "pg": "^8.13.1"
   },
