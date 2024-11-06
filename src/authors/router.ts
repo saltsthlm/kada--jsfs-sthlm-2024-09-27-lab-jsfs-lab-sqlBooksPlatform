@@ -12,7 +12,7 @@ export const createAuthorsRouter = (service: AuthorService) => {
   router.get("/:id", async (req, res) => {
     const author = await service.getById(req.params.id);
     res.status(200).json(author);
-  })
+  });
 
   return router;
 };
