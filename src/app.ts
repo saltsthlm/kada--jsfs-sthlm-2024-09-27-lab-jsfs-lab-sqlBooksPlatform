@@ -16,7 +16,7 @@ const port = 3001;
 
     app.use('/api/authors', authorRouter);
 
-    const authors = await service.getAll()
+    const authors = await service.getById("1")
     console.log(authors);
     
 })();
