@@ -1,6 +1,6 @@
 import { PoolClient } from "pg";
 import { createPurchasesService } from "./service";
-import { createPurchasesRouter } from "./router"
+import { createPurchasesRouter } from "./router";
 
-export const createPurchasesFeature = (db: PoolClient) => 
-    createPurchasesRouter(createPurchasesService(db))
+export const createPurchasesFeature = (db: PoolClient) =>
+  createPurchasesRouter(createPurchasesService(db));

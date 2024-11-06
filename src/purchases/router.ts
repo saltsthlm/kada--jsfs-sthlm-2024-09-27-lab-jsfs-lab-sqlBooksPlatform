@@ -2,10 +2,10 @@ import { PurchasesService } from "./service";
 import express from "express";
 
 export const createBuyersRouter = (service: PurchasesService) => {
-    const router = express.Router();
-    router.post("/", async (req, res) => {
-      await service.add(req.body);
-      res.status(201).json();
-    });
-    return router
-}
+  const router = express.Router();
+  router.post("/", async (req, res) => {
+    await service.add(req.body);
+    res.status(201).json();
+  });
+  return router;
+};
