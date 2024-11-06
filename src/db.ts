@@ -1,4 +1,4 @@
-import pg from 'pg'
+import pg from "pg";
 /* import { config } from '../config'; */
 const { Pool } = pg;
 
@@ -11,8 +11,7 @@ export const createDatabase = async () => {
     port: 5432,
     max: 20,
     idleTimeoutMillis: 30000,
-    connectionTimeoutMillis: 2000
+    connectionTimeoutMillis: 2000,
   });
   return await pool.connect();
 };
-

@@ -7,7 +7,7 @@ const requiredVars = [
   "PG_USER",
   "PG_PASSWORD",
   "PG_DATABASE",
-  "PG_PORT"
+  "PG_PORT",
 ];
 
 requiredVars.forEach((key) => {

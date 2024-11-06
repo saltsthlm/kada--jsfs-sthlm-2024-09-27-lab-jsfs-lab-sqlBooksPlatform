@@ -1,4 +1,4 @@
 export type Instructor = {
-  id: number,
-  name: string
+  id: number;
+  name: string;
 };

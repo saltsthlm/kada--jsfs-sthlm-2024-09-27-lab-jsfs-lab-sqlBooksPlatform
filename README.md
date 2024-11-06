@@ -16,50 +16,53 @@ Testing will be manual; we recommend using tools like Postman.
 
 Create the following tables in your database:
 
-* `authors` - Holds information about book authors.
-  * Fields:
-    * `id` - unique identifier
-    * `name` - author's name
-    * `bio` - short biography
+- `authors` - Holds information about book authors.
 
-* `books` - Contains details about the books.
-  * Fields:
-    * `id` - unique identifier
-    * `title` - book title
-    * `description` - brief description
-    * `price` - selling price
-    * `authorId` - foreign key to the authors table
+  - Fields:
+    - `id` - unique identifier
+    - `name` - author's name
+    - `bio` - short biography
 
-* `buyers` - Stores information about buyers.
-  * Fields:
-    * `id` - unique identifier
-    * `name` - buyer's name
-    * `email` - buyer's email (unique)
+- `books` - Contains details about the books.
 
-* `purchases` - A junction table for many-to-many relationship between buyers and books (records purchases).
-  * Fields:
-    * `buyerId` - foreign key to the buyers table
-    * `bookId` - foreign key to the books table
-    * `purchaseDate` - date of purchase
+  - Fields:
+    - `id` - unique identifier
+    - `title` - book title
+    - `description` - brief description
+    - `price` - selling price
+    - `authorId` - foreign key to the authors table
+
+- `buyers` - Stores information about buyers.
+
+  - Fields:
+    - `id` - unique identifier
+    - `name` - buyer's name
+    - `email` - buyer's email (unique)
+
+- `purchases` - A junction table for many-to-many relationship between buyers and books (records purchases).
+  - Fields:
+    - `buyerId` - foreign key to the buyers table
+    - `bookId` - foreign key to the books table
+    - `purchaseDate` - date of purchase
 
 ### The API endpoints for you to implement
 
 Implement the following endpoints:
 
-* `GET` `/api/books` - list all books, including author details
-* `GET` `/api/books/:id` - get details of a single book, including author
-* `POST` `/api/books` - add a new book (exclude `id`, include `authorId`)
-* `PUT` `/api/books/:id` - update a book's details
-* `DEL` `/api/books/:id` - delete a book
-* `GET` `/api/authors` - list all authors with their books
-* `POST` `/api/buyers` - add a new buyer
-* `GET` `/api/purchases` - list all purchases, including buyer and book details
-* `POST` `/api/purchases` - record a new purchase (include `buyerId` and `bookId`)
+- `GET` `/api/books` - list all books, including author details
+- `GET` `/api/books/:id` - get details of a single book, including author
+- `POST` `/api/books` - add a new book (exclude `id`, include `authorId`)
+- `PUT` `/api/books/:id` - update a book's details
+- `DEL` `/api/books/:id` - delete a book
+- `GET` `/api/authors` - list all authors with their books
+- `POST` `/api/buyers` - add a new buyer
+- `GET` `/api/purchases` - list all purchases, including buyer and book details
+- `POST` `/api/purchases` - record a new purchase (include `buyerId` and `bookId`)
 
 ### Additional Guidance
 
-* Use `pgAdmin` and `VSCode Extension for Postgres` for database management.
-* Seed your database using a script similar to `initSQL.sql`.
-* Create separate files for different aspects of your API, e.g., `db.ts` for database access code.
-* Utilize the `pg` package for database interactions.
-* Manual testing is recommended, though you may explore automated testing with tools like `supertest`.
+- Use `pgAdmin` and `VSCode Extension for Postgres` for database management.
+- Seed your database using a script similar to `initSQL.sql`.
+- Create separate files for different aspects of your API, e.g., `db.ts` for database access code.
+- Utilize the `pg` package for database interactions.
+- Manual testing is recommended, though you may explore automated testing with tools like `supertest`.

@@ -1,5 +1,5 @@
 export const createTablesAndSeedData = () => {
-    return `
+  return `
         DROP TABLE IF EXISTS purchases;
         DROP TABLE IF EXISTS buyers;
         DROP TABLE IF EXISTS books;
@@ -58,4 +58,4 @@ export const createTablesAndSeedData = () => {
         (2, 2, '2024-11-06 12:30:00'),
         (3, 3, '2024-11-06 13:00:00');
     `;
-}
+};
