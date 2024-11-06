@@ -22,15 +22,24 @@ export const createBookService = (db: PoolClient) => {
         bookSchema.parse(book)
         const query = "INSERT INTO books (title, description, price, author_id) values($1, $2, $3, $4)"
         await db.query(query, [title, description, price, author_id])
-    }
-    async patch(book: Book) {
+    },
+    async patch(book: Book, id: string) {
+        const { title, description, price, author_id } = book;
         
+        const updateQuery = `
+            UPDATE books
+            SET title = $1, description = $2, price = $3, author_id = $4
+            WHERE id = $5
+        `;
+        const result = await db.query(updateQuery, [title, description, price, author_id, id]);
+        return result.rows[0];
     }
+    
   };
 };
 
 export const bookSchema = z.object({
-    id: z.string(),
+    //id: z.string(),
     title: z.string(),
     description: z.string(),
     price: z.number(),

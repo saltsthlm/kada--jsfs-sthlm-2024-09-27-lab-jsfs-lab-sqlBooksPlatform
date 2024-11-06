@@ -11,5 +11,8 @@ export const createBooksRouter = (service: BookService) => {
     const book = await service.getById(req.params.id);
     res.status(200).json(book);
   });
+  router.patch("/:id", async (req, res) => {
+    const book = await service.patch()
+  })
   return router;
 };
