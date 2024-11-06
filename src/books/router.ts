@@ -15,5 +15,9 @@ export const createBooksRouter = (service: BookService) => {
     const book = await service.patch(req.body, req.params.id);
     res.status(200).json(book);
   })
+  router.delete("/:id", async (req, res) => {
+    await service.delete(req.params.id)
+    res.status(204)
+  });
   return router;
 };

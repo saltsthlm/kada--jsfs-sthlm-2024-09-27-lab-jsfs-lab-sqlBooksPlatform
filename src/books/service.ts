@@ -1,6 +1,5 @@
-import { describe } from "node:test";
 import { PoolClient } from "pg";
-import { z, ZodSchema } from "zod"
+import { z, } from "zod"
 
 export const createBookService = (db: PoolClient) => {
   return {
@@ -18,12 +17,13 @@ export const createBookService = (db: PoolClient) => {
       return book.rows[0];
     },
     async post(book: Book) {
-        const {title, description, price, author_id } = book
         bookSchema.parse(book)
+        const {title, description, price, author_id } = book
         const query = "INSERT INTO books (title, description, price, author_id) values($1, $2, $3, $4)"
         await db.query(query, [title, description, price, author_id])
     },
     async patch(book: Book, id: string) {
+        bookSchema.parse(book)
         const { title, description, price, author_id } = book;
         
         const updateQuery = `
@@ -33,6 +33,10 @@ export const createBookService = (db: PoolClient) => {
         `;
         const result = await db.query(updateQuery, [title, description, price, author_id, id]);
         return result.rows[0];
+    },
+    async delete(id: string) {
+        const query = "DELETE FROM book WHERE id = $1"
+        await db.query(query, [id])
     }
     
   };
