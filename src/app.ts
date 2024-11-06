@@ -1,6 +1,6 @@
 import express, { Express } from 'express';
 import { createDatabase } from './db';
-import { createTablesAndSeedData } from './authors/db-seed';
+import { createTablesAndSeedData } from './db-seed';
 import { createAuthorService } from './authors/service';
 import { createAuthorsRouter } from './authors/router';
 
