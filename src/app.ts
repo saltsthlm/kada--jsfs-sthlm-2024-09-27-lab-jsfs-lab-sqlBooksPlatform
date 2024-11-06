@@ -3,6 +3,8 @@ import { createDatabase } from "./db";
 import { createTablesAndSeedData } from "./db-seed";
 import { createAuthorService } from "./authors/service";
 import { createAuthorsRouter } from "./authors/router";
+import { createBookService } from "./books/service";
+import { createBooksRouter } from "./books/router";
 
 const app: Express = express();
 const port = 3001;
@@ -10,16 +12,19 @@ const port = 3001;
 (async () => {
   const client = await createDatabase();
   client.query(createTablesAndSeedData());
-
-  const service = createAuthorService(client);
-  const authorRouter = createAuthorsRouter(service);
+  const authorService = createAuthorService(client);
+  const authorRouter = createAuthorsRouter(authorService);
+  const BookService = createBookService(client);
+  const bookRouters = createBooksRouter(BookService)
 
   app.use("/api/authors", authorRouter);
+  app.use("/api/books", bookRouters)
 
-  const authors = await service.getById("1");
+  const authors = await authorService.getById("1");
   console.log(authors);
 })();
 
 app.listen(port, () =>
   console.log(`Example app listening at http://localhost:${port}`),
 );
+
