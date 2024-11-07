@@ -10,9 +10,3 @@ export const createAuthorFeature = (db: Db) => {
     router,
   };
 };
-
-// await db.insert(authorsTable).values(user);
-// console.log('New user created!')
-
-// const users = await db.select().from(authorsTable);
-// console.log('Getting all users from the database: ', users)
