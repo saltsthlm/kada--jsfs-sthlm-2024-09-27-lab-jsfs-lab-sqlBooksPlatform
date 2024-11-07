@@ -20,7 +20,7 @@ export const createBookService = (db: PoolClient) => {
       bookSchema.parse(book);
       const { title, description, price, author_id } = book;
       const query =
-        "INSERT INTO books (title, description, price, author_id) VALUES ($1, $2, $3, $4) RETURNING *";
+        "INSERT INTO books (title, description, price, author_id) VALUES ($1, $2, $3, $4) RETURNING id";
       const result = await db.query(query, [
         title,
         description,

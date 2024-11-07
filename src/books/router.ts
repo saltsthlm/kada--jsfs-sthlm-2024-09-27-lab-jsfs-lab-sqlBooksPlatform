@@ -12,7 +12,7 @@ export const createBooksRouter = (service: BookService) => {
     res.status(200).json(book);
   });
   router.post("/", async (req, res) => {
-    await service.add(req.body);
+    const result = await service.add(req.body);
     res.status(201).json();
   });
   router.patch("/:id", async (req, res) => {
