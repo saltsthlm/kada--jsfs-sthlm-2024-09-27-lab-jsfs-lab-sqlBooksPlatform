@@ -26,15 +26,14 @@ export const createService = (db: Db) => {
 
   return {
     async getAll() {
-      const authors = await db.select().from(authorsTable);
-      return authors;
+      return await db.select().from(authorsTable);
     },
     async getById(id: string) {
       const authors = await db.select().from(authorsTable).where(eq(authorsTable.id, Number(id)));
       if (authors.length === 0) {
         throw new Error("Id does not exist for this author");
       }
-      return authors;
+      return authors[0];
     },
   };
 };
