@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { number, z } from "zod";
 import { Db } from "../../app";
 import { booksTable } from "./schema";
 import { eq } from "drizzle-orm";
@@ -39,7 +39,7 @@ export const createService = (db: Db) => {
     },
     async add(book: Book) {
       const parsedBook = bookSchema.parse(book);
-      const result = await db.insert(booksTable).values(book)
+      const result = await db.insert(booksTable).values(parsedBook)
       return result.rows[0];
     },
     async patch(updateData: UpdateBook, id: string) {
@@ -49,10 +49,9 @@ export const createService = (db: Db) => {
           ...parsedUpdate
       }).where(eq(booksTable.id, Number(id)));
     },
-/*     async delete(id: string) {
-      const query = "DELETE FROM books WHERE id = $1";
-      await db.query(query, [id]);
-    }, */
+    async delete(id: string) {
+      await db.delete(booksTable).where(eq(booksTable.id, Number(id)));
+    },
   };
 };
 
