@@ -5,6 +5,7 @@ import { drizzle } from "drizzle-orm/node-postgres";
 import { createBookFeature } from "./feature/books/feature";
 import { createBuyersFeature } from "./feature/buyers/feature";
 import { createPurchasesFeature } from "./feature/purchases/feature";
+import { createErrorRequestHandler } from "./middleware/error-handler";
 
 
 const app: Express = express();
@@ -18,6 +19,7 @@ const db = drizzle(process.env.DATABASE_URL!);
   app.use("/api/books", createBookFeature(db).router);
   //app.use("/api/buyers", createBuyersFeature(db).router);
   //app.use("/api/purchases", createPurchasesFeature(db).router);
+  app.use(createErrorRequestHandler())
 })();
 
 app.listen(port, () =>
