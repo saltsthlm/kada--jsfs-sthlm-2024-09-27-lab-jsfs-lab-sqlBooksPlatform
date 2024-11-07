@@ -1,30 +1,20 @@
 import express, { Express } from "express";
 import { createDatabase } from "./db";
 import { createTablesAndSeedData } from "./db-seed";
-import { createAuthorFeature } from "./authors/feature";
-import { createBookFeature } from "./books/feature";
-import { createPurchasesFeature } from "./purchases/feature";
-import { createBuyersFeature } from "./buyers/feature";
-import 'dotenv/config';
-import { drizzle } from 'drizzle-orm/node-postgres';
-import { authorsTable } from "./authors/schema";
+import { createAuthorFeature } from "./feature/authors/feature";
+import { createBookFeature } from "./feature/books/feature";
+import { createPurchasesFeature } from "./feature/purchases/feature";
+import { createBuyersFeature } from "./feature/buyers/feature";
+import "dotenv/config";
+import { drizzle } from "drizzle-orm/node-postgres";
+import { authorsTable } from "./feature/authors/schema";
 
 const app: Express = express();
 const port = 3001;
 
+const db = drizzle(process.env.DATABASE_URL!);
+
 (async () => {
-
-  const db = drizzle(process.env.DATABASE_URL!);
-  const user: typeof authorsTable.$inferInsert = {
-    name: 'John',
-    bio: 'detta är en bio',
-  };  
-
-  await db.insert(authorsTable).values(user);
-  console.log('New user created!')
-
-  const users = await db.select().from(authorsTable);
-  console.log('Getting all users from the database: ', users)
   //const client = await createDatabase();
   //client.query(createTablesAndSeedData());
 
@@ -32,12 +22,14 @@ const port = 3001;
   //console.log(books);
 
   app.use(express.json());
-/*   app.use("/api/authors", createAuthorFeature(client));
-  app.use("/api/books", createBookFeature(client));
-  app.use("/api/buyers", createBuyersFeature(client));
-  app.use("/api/purchases", createPurchasesFeature(client)); */
+  app.use("/api/authors", createAuthorFeature(db).router);
+  // app.use("/api/books", createBookFeature(client));
+  // app.use("/api/buyers", createBuyersFeature(client));
+  // app.use("/api/purchases", createPurchasesFeature(client));
 })();
 
 app.listen(port, () =>
   console.log(`Example app listening at http://localhost:${port}`),
 );
+
+export type Db = ReturnType<typeof drizzle>;
