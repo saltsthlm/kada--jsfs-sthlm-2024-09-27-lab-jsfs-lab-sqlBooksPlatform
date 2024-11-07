@@ -8,6 +8,20 @@
       "when": 1730981204547,
       "tag": "0000_peaceful_expediter",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1730989544126,
+      "tag": "0001_calm_meteorite",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1730989672630,
+      "tag": "0002_left_king_cobra",
+      "breakpoints": true
     }
   ]
 }

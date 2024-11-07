@@ -1,14 +1,13 @@
 import { z } from "zod";
 import { Db } from "../../app";
 import { booksTable } from "./schema";
-import { title } from "process";
 import { eq } from "drizzle-orm";
 
 const seed = async (db: Db) => {
   const book: typeof booksTable.$inferInsert = {
     title: "John",
     description: "detta är en bio",
-    price: 19.90,
+    price: 19.99,
     author_id: 4
   };
   
@@ -26,6 +25,7 @@ const seed = async (db: Db) => {
 };
 
 export const createService = (db: Db) => {
+  seed(db);
   return {
     async getAll() {
       return await db.select().from(booksTable);
@@ -39,7 +39,7 @@ export const createService = (db: Db) => {
     },
     async add(book: Book) {
       const parsedBook = bookSchema.parse(book);
-      const result = await db.insert(booksTable).values(parsedBook)
+      const result = await db.insert(booksTable).values(book)
       return result.rows[0];
     },
     async patch(updateData: UpdateBook, id: string) {
@@ -48,7 +48,6 @@ export const createService = (db: Db) => {
       await db.update(booksTable).set({
           ...parsedUpdate
       }).where(eq(booksTable.id, Number(id)));
-
     },
 /*     async delete(id: string) {
       const query = "DELETE FROM books WHERE id = $1";
