@@ -16,8 +16,8 @@ const db = drizzle(process.env.DATABASE_URL!);
   app.use(express.json());
   app.use("/api/authors", createAuthorFeature(db).router);
   app.use("/api/books", createBookFeature(db).router);
-  app.use("/api/buyers", createBuyersFeature(db).router);
-  app.use("/api/purchases", createPurchasesFeature(db).router);
+  //app.use("/api/buyers", createBuyersFeature(db).router);
+  //app.use("/api/purchases", createPurchasesFeature(db).router);
 })();
 
 app.listen(port, () =>
