@@ -44,21 +44,9 @@ export const createService = (db: Db) => {
     },
     async patch(book: Book, id: string) {
       bookSchema.parse(book);
-      const { title, description, price, author_id } = book;
-
-      const updateQuery = `
-            UPDATE books
-            SET title = $1, description = $2, price = $3, author_id = $4
-            WHERE id = $5
-            RETURNING *;
-        `;
-      const result = await db.query(updateQuery, [
-        title,
-        description,
-        price,
-        author_id,
-        id,
-      ]);
+      await db.update(booksTable).set({
+        
+      })
 
       if (result.rows.length === 0) {
         throw new Error("Book with that id does not exist");
