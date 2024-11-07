@@ -1,7 +1,7 @@
 import { PoolClient } from "pg";
 import { z } from "zod";
 
-export const createPurchasesService = (db: PoolClient) => {
+export const createService = (db: PoolClient) => {
   return {
     async add(purchases: Purchases) {
       purchasesSchema.parse(purchases);
@@ -16,7 +16,6 @@ export const createPurchasesService = (db: PoolClient) => {
 export const purchasesSchema = z.object({
   buyer_id: z.number(),
   book_id: z.number(),
-
 });
 
 type Purchases = z.infer<typeof purchasesSchema>;

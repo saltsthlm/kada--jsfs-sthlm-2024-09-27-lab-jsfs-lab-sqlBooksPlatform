@@ -1,7 +1,7 @@
 import { PoolClient } from "pg";
 import { z } from "zod";
 
-export const createBookService = (db: PoolClient) => {
+export const createService = (db: PoolClient) => {
   return {
     async getAll() {
       const query = "SELECT * FROM books";

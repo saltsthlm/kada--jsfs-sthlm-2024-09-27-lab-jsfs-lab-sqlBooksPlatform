@@ -1,7 +1,7 @@
 import express from "express";
-import { AuthorService } from "./service";
+import { Service } from "./service";
 
-export const createAuthorsRouter = (service: AuthorService) => {
+export const createRouter = (service: Service) => {
   const router = express.Router();
 
   router.get("/", async (req, res) => {

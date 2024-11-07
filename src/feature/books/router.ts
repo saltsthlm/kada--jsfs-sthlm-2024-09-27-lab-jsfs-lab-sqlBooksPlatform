@@ -1,7 +1,7 @@
 import express from "express";
 import { BookService } from "./service";
 
-export const createBooksRouter = (service: BookService) => {
+export const createRouter = (service: BookService) => {
   const router = express.Router();
   router.get("/", async (req, res) => {
     const books = await service.getAll();

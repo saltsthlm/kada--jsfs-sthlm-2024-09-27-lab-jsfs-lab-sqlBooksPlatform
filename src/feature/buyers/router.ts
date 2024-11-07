@@ -1,7 +1,7 @@
 import express from "express";
 import { BuyerService } from "./service";
 
-export const createBuyersRouter = (service: BuyerService) => {
+export const createRouter = (service: BuyerService) => {
   const router = express.Router();
   router.post("/", async (req, res) => {
     await service.add(req.body);

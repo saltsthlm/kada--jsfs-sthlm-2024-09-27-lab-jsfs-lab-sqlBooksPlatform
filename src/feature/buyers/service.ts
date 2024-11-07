@@ -1,7 +1,7 @@
 import { PoolClient } from "pg";
 import { z } from "zod";
 
-export const createBuyersService = (db: PoolClient) => {
+export const createService = (db: PoolClient) => {
   return {
     async add(buyer: Buyer) {
       const { name, email } = buyer;
