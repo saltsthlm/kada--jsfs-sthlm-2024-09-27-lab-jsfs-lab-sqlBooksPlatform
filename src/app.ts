@@ -16,10 +16,12 @@ const db = drizzle(process.env.DATABASE_URL!);
 (async () => {
   app.use(express.json());
   app.use("/api/authors", createAuthorFeature(db).router);
-  app.use("/api/books", createBookFeature(db).router);
+
+    app.use("/api/books", createBookFeature(db).router);
+    
+    app.use(createErrorRequestHandler())
   //app.use("/api/buyers", createBuyersFeature(db).router);
   //app.use("/api/purchases", createPurchasesFeature(db).router);
-  app.use(createErrorRequestHandler())
 })();
 
 app.listen(port, () =>

@@ -48,6 +48,7 @@ export const createService = (db: Db) => {
       await db.update(booksTable).set({
           ...parsedUpdate
       }).where(eq(booksTable.id, Number(id)));
+      throw new Error("Catch me if you can");
     },
     async delete(id: string) {
       await db.delete(booksTable).where(eq(booksTable.id, Number(id)));
