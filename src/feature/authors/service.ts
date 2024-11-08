@@ -6,12 +6,13 @@ const seed = async (db: Db) => {
   const author: typeof authorsTable.$inferInsert = {
     name: "John",
     bio: "detta är en bio",
+    book_id: 0
   };
 
   const authors = [];
 
   for (let i = 0; i < 10; i++) {
-    authors.push({ ...author, name: `John ${i}` });
+    authors.push({ ...author, name: `John ${i}`, book_id: ++i });
   }
 
   for (const author of authors) {
