@@ -5,7 +5,9 @@ export function createErrorRequestHandler() {
   const errorHandler: ErrorRequestHandler = (err, _req, res, _next) => {
     if (err instanceof ZodError) {
       res.status(400).json(err.errors);
+      return;
     }
+
     if (err instanceof AppError) {
       if (err.statusMessage() === "NOT_FOUND_ERROR") {
         res.status(404).json(err.message);
