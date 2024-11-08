@@ -1,4 +1,4 @@
-import { eq } from 'drizzle-orm';
+import { eq } from "drizzle-orm";
 import type { Db } from "../../app";
 import { authorsTable } from "./schema";
 
@@ -7,7 +7,7 @@ const seed = async (db: Db) => {
     name: "John",
     bio: "detta är en bio",
   };
-  
+
   const authors = [];
 
   for (let i = 0; i < 10; i++) {
@@ -18,7 +18,7 @@ const seed = async (db: Db) => {
     await db.insert(authorsTable).values(author);
   }
 
-  console.log("Authors table populated successfully");  
+  console.log("Authors table populated successfully");
 };
 
 export const createService = (db: Db) => {
@@ -29,7 +29,10 @@ export const createService = (db: Db) => {
       return await db.select().from(authorsTable);
     },
     async getById(id: string) {
-      const authors = await db.select().from(authorsTable).where(eq(authorsTable.id, Number(id)));
+      const authors = await db
+        .select()
+        .from(authorsTable)
+        .where(eq(authorsTable.id, Number(id)));
       if (authors.length === 0) {
         throw new Error("Id does not exist for this author");
       }

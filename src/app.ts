@@ -7,19 +7,18 @@ import { createBuyersFeature } from "./feature/buyers/feature";
 import { createPurchasesFeature } from "./feature/purchases/feature";
 import { createErrorRequestHandler } from "./middleware/error-handler";
 
-
 const app: Express = express();
 const port = 3001;
 
-const db = drizzle(process.env.DATABASE_URL!);
-
 (async () => {
+  const db = drizzle(process.env.DATABASE_URL!);
+
   app.use(express.json());
   app.use("/api/authors", createAuthorFeature(db).router);
 
-    app.use("/api/books", createBookFeature(db).router);
-    
-    app.use(createErrorRequestHandler())
+  app.use("/api/books", createBookFeature(db).router);
+
+  app.use(createErrorRequestHandler());
   //app.use("/api/buyers", createBuyersFeature(db).router);
   //app.use("/api/purchases", createPurchasesFeature(db).router);
 })();

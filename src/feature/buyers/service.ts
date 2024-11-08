@@ -1,4 +1,3 @@
-import { PoolClient } from "pg";
 import { z } from "zod";
 import { Db } from "../../app";
 

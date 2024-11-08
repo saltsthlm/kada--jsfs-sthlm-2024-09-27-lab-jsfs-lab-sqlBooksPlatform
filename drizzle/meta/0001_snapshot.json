@@ -141,9 +141,7 @@
         "buyers_email_unique": {
           "name": "buyers_email_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
+          "columns": ["email"]
         }
       },
       "policies": {},

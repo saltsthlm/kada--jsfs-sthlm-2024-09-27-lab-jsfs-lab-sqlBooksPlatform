@@ -1,4 +1,4 @@
-import { integer, pgTable, timestamp} from "drizzle-orm/pg-core";
+import { integer, pgTable, timestamp } from "drizzle-orm/pg-core";
 
 export const purchasesTable = pgTable("purchases", {
   buyer_id: integer().primaryKey().generatedAlwaysAsIdentity(),

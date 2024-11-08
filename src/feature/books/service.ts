@@ -1,16 +1,17 @@
-import { number, z } from "zod";
+import { z } from "zod";
 import { Db } from "../../app";
 import { booksTable } from "./schema";
 import { eq } from "drizzle-orm";
+import { BadRequestError, NotFoundError } from "../../errors";
 
 const seed = async (db: Db) => {
   const book: typeof booksTable.$inferInsert = {
     title: "John",
     description: "detta är en bio",
     price: 19.99,
-    author_id: 4
+    author_id: 4,
   };
-  
+
   const books = [];
 
   for (let i = 0; i < 10; i++) {
@@ -21,7 +22,7 @@ const seed = async (db: Db) => {
     await db.insert(booksTable).values(book);
   }
 
-  console.log("Books table populated successfully");  
+  console.log("Books table populated successfully");
 };
 
 export const createService = (db: Db) => {
@@ -31,24 +32,29 @@ export const createService = (db: Db) => {
       return await db.select().from(booksTable);
     },
     async getById(id: string) {
-      const books = await db.select().from(booksTable).where(eq(booksTable.id, Number(id)));
-      if (books.length === 0) {
-        throw new Error("Book with that id does not exist");
-      }
+      const books = await db
+        .select()
+        .from(booksTable)
+        .where(eq(booksTable.id, Number(id)));
+      if (books.length === 0)
+        throw new NotFoundError("Book with that id does not exist");
       return books[0];
     },
     async add(book: Book) {
       const parsedBook = bookSchema.parse(book);
-      const result = await db.insert(booksTable).values(parsedBook)
+      const result = await db.insert(booksTable).values(parsedBook);
       return result.rows[0];
     },
     async patch(updateData: UpdateBook, id: string) {
       const parsedUpdate = updateBookSchema.parse(updateData);
-
-      await db.update(booksTable).set({
-          ...parsedUpdate
-      }).where(eq(booksTable.id, Number(id)));
-      throw new Error("Catch me if you can");
+      if (Object.keys(parsedUpdate).length === 0)
+        throw new BadRequestError("Can't update with wrong input.");
+      await db
+        .update(booksTable)
+        .set({
+          ...parsedUpdate,
+        })
+        .where(eq(booksTable.id, Number(id)));
     },
     async delete(id: string) {
       await db.delete(booksTable).where(eq(booksTable.id, Number(id)));
