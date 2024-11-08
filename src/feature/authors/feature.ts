@@ -8,5 +8,6 @@ export const createAuthorFeature = (db: Db) => {
 
   return {
     router,
+    service
   };
 };
