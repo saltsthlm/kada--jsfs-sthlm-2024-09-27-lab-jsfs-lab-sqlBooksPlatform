@@ -14,9 +14,10 @@ const port = 3001;
   const db = drizzle(process.env.DATABASE_URL!);
 
   app.use(express.json());
-  app.use("/api/authors", createAuthorFeature(db).router);
+  const { service, router} = createAuthorFeature(db);
+  app.use("/api/authors", router);
 
-  app.use("/api/books", createBookFeature(db).router);
+  app.use("/api/books", createBookFeature(db, service).router);
 
   app.use(createErrorRequestHandler());
   //app.use("/api/buyers", createBuyersFeature(db).router);
